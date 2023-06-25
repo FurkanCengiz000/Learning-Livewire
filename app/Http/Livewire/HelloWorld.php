@@ -2,22 +2,25 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Contact;
 use Illuminate\Http\Request;
 use Livewire\Component;
 
 class HelloWorld extends Component
 {
-    
-    public $name = 'Jelly';
+    public $contacts;
+    public $names = ['Jelly', 'Man', 'Chico'];
 
-    public function mount(Request $request, $name)
+    public function mount()
     {
-        $this->name = $request->input('name', $name);
+        $this->contacts = Contact::all();
     }
 
-    public function updatedName()
+    public function removeContact($id)
     {
-        $this->name = strtoupper($this->name);
+        $contact = Contact::findOrFail($id);
+        $contact->delete();
+        $this->contacts = Contact::all();
     }
 
     public function render()
