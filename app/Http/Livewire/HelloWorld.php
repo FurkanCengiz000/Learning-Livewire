@@ -11,6 +11,8 @@ class HelloWorld extends Component
     public $contacts;
     public $names = ['Jelly', 'Man', 'Chico'];
 
+    protected $listeners =  ['foo' => '$refresh'];
+
     public function mount()
     {
         $this->contacts = Contact::all();
